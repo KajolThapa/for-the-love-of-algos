@@ -36,4 +36,18 @@ class LinkedList {
             node = node.next
         }
     }
+    clear() {
+        this.head = null;
+    }
+    removeFirst() {
+        if (!this.head) {return;}
+        this.head = this.head.next;
+        // if (this.head.next) {
+        //     this.head = this.head.next;
+        // }
+        // else {
+        //     this.head = null;
+        // }
+
+    }
 }
