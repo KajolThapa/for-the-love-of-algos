@@ -77,6 +77,16 @@ class LinkedList {
             counter += 1;
             node = node.next;
         }
-        return null; // if the index is outnof bound
+        return null; // if the index is outof bound
     }
+    removeAt(index) {
+        if (!this.head) {return;}
+        if (index === 0) {this.head = this.head.next;}
+        const prev = this.getAt(index - 1);
+        if (!prev || !prev.next) {return;}
+        prev.next = prev.next.next;
+       
+    }
+    
+
 }
