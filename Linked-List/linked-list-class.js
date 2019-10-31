@@ -67,6 +67,8 @@ class LinkedList {
         }
 
     }
+
+    //General
     getAt(index) {
         let counter = 0;
         let node = this.head
@@ -87,6 +89,27 @@ class LinkedList {
         prev.next = prev.next.next;
        
     }
+    insertAt(data, index) {
+        if (!this.head) {
+            this.head = new Node(data);
+        }
+        if (index === 0) {
+            this.head = new Node(data, this.head);
+            return;
+        }
+        const prev = this.getAt(index - 1) || this.getLast(); //to handle outof bound index
+        const node = new Node(data, prev.next);
+        prev.next = node;
+    }
     
-
 }
+
+const ll = new LinkedList();
+ll.head = new Node(5);
+ll.head.next = new Node(6);
+ll.head.next.next = new Node(7);
+ll.inserFirst(4);
+ll.insertLast(8);
+console.log(ll);
+
+console.log(ll.getLast());
