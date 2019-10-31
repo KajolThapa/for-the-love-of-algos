@@ -42,13 +42,6 @@ class LinkedList {
     removeFirst() {
         if (!this.head) {return;}
         this.head = this.head.next;
-        // if (this.head.next) {
-        //     this.head = this.head.next;
-        // }
-        // else {
-        //     this.head = null;
-        // }
-
     }
     removeLast() {
         if (!this.head) {return ;}
@@ -60,5 +53,30 @@ class LinkedList {
            node = node.next
         }
         prev.next = null;
+    }
+    insertLast(data) {
+        //use getLast to get last node
+        const last = this.getLast();
+        if (last) {
+            //there are some existing nodes in our chain
+            last.next = new Node(data);
+
+        } else {
+            //the chain is empty
+            this.head = new Node(data);
+        }
+
+    }
+    getAt(index) {
+        let counter = 0;
+        let node = this.head
+        while (node) {
+            if (counter === index) {
+                return node;
+            }
+            counter += 1;
+            node = node.next;
+        }
+        return null; // if the index is outnof bound
     }
 }
