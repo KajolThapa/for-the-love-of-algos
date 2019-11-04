@@ -15,10 +15,11 @@
 
 function isPalindrome(str) {
     if (str === "") {return false;}
-    const regex = [/^A-Za-z0-9/+g];
+    const regex = /[^A-Za-z0-9]/g
     const newStr = str.replace(regex,'');
+    console.log(newStr);
     let leftPointer = 0;
-    let rightPointer = string.length - 1;
+    let rightPointer = newStr.length - 1;
     while (leftPointer < rightPointer) {
         if (newStr[leftPointer] !== newStr[rightPointer]) {
             return false;
@@ -26,6 +27,8 @@ function isPalindrome(str) {
         leftPointer++;
         rightPointer--;
     }
+    return true;
 }
+console.log(isPalindrome('race car'))
 
-export default isPalindrome;
+module.exports =  isPalindrome;
