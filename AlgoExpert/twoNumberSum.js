@@ -27,9 +27,37 @@ function twoNumberSum(array, targetSum) {
 // ===== Solution 2
     //  0(n) time | 0(n) space
 
+function twoNumberSum2(array, targetSum) {
+    const cache= {};
+    for (const num of array) {
+        const complement = targetSum - num;
+        if (complement in cache) {
+            return [complement, num].sort((a,b) => a-b);
+        } else {
+            cache[num] = true;
+        }
+    }
+    return true;
+}
 
 
 // ===== Solution 3
     //  0(n) time | 0(1) space
+function twoNumberSum3(array, targetSum) {
+    let left = 0;
+    let right = array.length - 1;
+    while (left < right) {
+        const currSum = array[left] + array[right];
+        if (currSum === targetSum) {
+            return [array[left], array[right]].sort((a,b) => a-b);
+        }
+         else if (currSum < targetSum) {
+             left++;
+         } else if (currSum > targetSum) {
+             right--;
+         }
+    }
+    return [];
+}
 
-console.log(twoNumberSum([3,5,-4,8,11,1,-1,6], 10));
+console.log(twoNumberSum3([3,5,-4,8,11,1,-1,6], 10));
