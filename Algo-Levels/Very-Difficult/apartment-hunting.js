@@ -77,8 +77,8 @@ function getIndexAtMinValue(array) {
     return idxAtMinValue;
 }
 
-
 // < ========== SOLUTION 2  O(br) Time   | O(br) Space
+
 function apartmentHunting(blocks, reqs) {
     const minDistancesFromBlocks = reqs.map(req => getMinDistances(blocks, req));  // O(br)
     // console.log('This is minDistancesFromBlocks', minDistancesFromBlocks);
