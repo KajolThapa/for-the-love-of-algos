@@ -44,22 +44,22 @@
 */
 
 // < ==== SOLUTION 1   # O(b^2 r) time   |    O(b) space
-function apartmentHunting(blocks,reqs) {
-    const maxDistanceAtBlocks = new Array(blocks.length).fill(-Infinity);
-    for (let i = 0; i < blocks.length; i += 1) {
-        reqs.forEach(req =>  {
-            let closetReqDistance = Infinity;
-            for (let j = 0; j < blocks.length; j += 1) {
-                if (blocks[j][req]) {
-                    closetReqDistance = Math.min(closetReqDistance, distanceBetween(i, j));
-                }
-            }
-            maxDistanceAtBlocks[i] = Math.max(maxDistanceAtBlocks[i], closetReqDistance)
-        });
+// function apartmentHunting(blocks,reqs) {
+//     const maxDistanceAtBlocks = new Array(blocks.length).fill(-Infinity);
+//     for (let i = 0; i < blocks.length; i += 1) {
+//         reqs.forEach(req =>  {
+//             let closetReqDistance = Infinity;
+//             for (let j = 0; j < blocks.length; j += 1) {
+//                 if (blocks[j][req]) {
+//                     closetReqDistance = Math.min(closetReqDistance, distanceBetween(i, j));
+//                 }
+//             }
+//             maxDistanceAtBlocks[i] = Math.max(maxDistanceAtBlocks[i], closetReqDistance)
+//         });
 
-    }
-    return getIndexAtMinValue(maxDistanceAtBlocks);
-}
+//     }
+//     return getIndexAtMinValue(maxDistanceAtBlocks);
+// }
 
 function distanceBetween(a, b) {
     return Math.abs( a- b);
@@ -76,6 +76,50 @@ function getIndexAtMinValue(array) {
     }
     return idxAtMinValue;
 }
+
+
+// < ========== SOLUTION 2  O(br) Time   | O(br) Space
+function apartmentHunting(blocks, reqs) {
+    const minDistancesFromBlocks = reqs.map(req => getMinDistances(blocks, req));  // O(br)
+    // console.log('This is minDistancesFromBlocks', minDistancesFromBlocks);
+    const maxDistancesAtBlocks = getMaxDistancesAtBlocks(blocks, minDistancesFromBlocks); // O(br)
+    // console.log('MaxDistancesAtBlock will be', maxDistancesAtBlocks);
+    return getIndexAtMinValue(maxDistancesAtBlocks); // O(br)
+
+}
+
+
+function getMinDistances(blocks, req) {
+    minDistances = new Array(blocks.length);
+    let closetReqIndex = Infinity;
+    for (let i = 0; i < blocks.length; i += 1){
+        if (blocks[i][req]) closetReqIndex = i;
+        minDistances[i] = distanceBetween(i, closetReqIndex)
+    }
+    for (let i = blocks.length - 1; i >= 0; i -= 1) {
+        if (blocks[i][req]) closetReqIndex = i;
+        minDistances[i] = Math.min(minDistances[i], distanceBetween(i, closetReqIndex)
+        );
+    }
+    return minDistances;
+
+}
+
+function getMaxDistancesAtBlocks(blocks, minDistancesFromBlocks) {
+    const maxDistancesAtBlocks = new Array(blocks.length);
+    for (let i = 0; i < blocks.length; i += 1) {
+        const minDistancesAtBlock = minDistancesFromBlocks.map(distances => distances[i]);
+        // console.log('***', minDistancesAtBlock);
+        maxDistancesAtBlocks[i] = Math.max(...minDistancesAtBlock);
+        // console.log('Hah',maxDistancesAtBlocks[i]);
+    }
+    return maxDistancesAtBlocks;
+
+}
+
+
+
+
 
 const blocks =  [
     {
