@@ -44,3 +44,40 @@
      if (n < 0) return 0;
      return climbStairs2(n-1) + climbStairs2(n-2);
  }
+
+ //Memoization
+ function climbStairs3(n) {
+     const cache = {
+         0:1,
+         1:1,
+     };
+
+     function counter(n) {
+         if (n === 0) return 1;
+         if (n < 0) return 0;
+
+         let n1 = cache[n-1];
+         if (!n1) cache[n-1] = n1 = counter(n-1);
+
+         let n2 = cache[n-2];
+         if (!n2) cache[n-2] = n2 = counter[n-2];
+
+         return n1 + n2;
+
+     }
+     return counter(n)
+ }
+
+ const steps = 5;
+ console.time('\nclimbStairs\n');
+ climbStairs(steps);
+ console.timeEnd('\nclimbStairs\n');
+
+
+ console.time('\nclimbStairs2\n');
+ climbStairs2(steps);
+ console.timeEnd('\nclimbStairs2\n');
+
+ console.time('\nclimbStairs3\n');
+ climbStairs2(steps);
+ console.timeEnd('\nclimbStairs3\n');
