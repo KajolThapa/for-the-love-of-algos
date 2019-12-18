@@ -1,3 +1,4 @@
+// Time O(n^2)  |  Space O(n)
 function threeNumberSum(array, targetSum) {
     array.sort((a,b) => a-b);
     const triplets = [];
