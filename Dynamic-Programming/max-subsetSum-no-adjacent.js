@@ -26,5 +26,25 @@
      return maxSums[maxSums.length - 1]
  }
 
- console.log(maxSubsetSumNoAdjacent([7, 10, 12, 7, 9, 14]))
- console.log(maxSubsetSumNoAdjacent([75, 105, 120, 75, 90, 135]))
+//  console.log(maxSubsetSumNoAdjacent([7, 10, 12, 7, 9, 14]))
+//  console.log(maxSubsetSumNoAdjacent([75, 105, 120, 75, 90, 135]))
+
+ //solution 2
+ // O(n) time | O(1) space
+ function maxSubsetSumNoAdjacent2(arr) {
+    if (arr.length === 0) return 0;
+    if (arr.length === 1) return arr[0];
+
+    let second = arr[0];
+    let first = Math.max(second, arr[1]);
+
+    for (let i = 2; i < arr.length; i++) {
+        const current = Math.max(first, second + arr[i]);
+        second = first;
+        first = current;
+    }
+    return first;
+ }
+
+ console.log(maxSubsetSumNoAdjacent2([7, 10, 12, 7, 9, 14]))
+ console.log(maxSubsetSumNoAdjacent2([75, 105, 120, 75, 90, 135]))
