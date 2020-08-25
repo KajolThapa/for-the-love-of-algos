@@ -12,6 +12,29 @@
  * */
 
 
+ /**
+  *  Explanation on approach
+  * We have to calculate how much will be contained above each index and find total unit of water collected. which depends on-
+  *     1. The height stored at each index- is there a pillar or not at that index??
+  *     2. Where is that index? Is it trapped between two bigger pillars left and right. because any amt of water that is excess or spills over the pillar will not be counted.
+  * 
+  * for example: arr = [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3].  at index 0, arr[0] is 0, there is no pillar to the left of 0, so any water that comes over that pillar will be washed away.
+  * Similarly, at index 1 where arr[1] is 8, there will be a pillar of height 8. there is no pillar to the lft of 8.
+  * At index 2 where arr[2] is 0, to the left of it , there is a large pillar of height 8 and there is also a pillar of height 5, 10, 1, 1, 3 on its right. so we know there will some water trapped above it.
+  * 
+  * Now, can see the pattern how The highest pillar is what matters. That means at any given index in our input array, we have to see where is the tallest pillar to its left and to its right.
+  * 
+  * again, example: at index 2 where arr[2] = 0 is the currenHeight, leftTallestPillar is of height 8 at & rightTallestPillar is of height 10.
+  * We take the minimum height between leftTallest and rightTallest which is 8(minHeight). 
+  * Now, to calculate water trapped above it, minHeight - currentHwight ->  8 - 0 = 8.
+  * 
+  * This held true if currentHeight is less than minHeight.
+  * 
+  * If currentHeight is greater of equal to minHeight, water trapped will be 0.
+  * 
+  * 
+  */
+
  // Time O(n)  | Space O(n)
  function waterArea(arr) {
     //Step 1: Build a new array of same length as input array, at each index- store the height of tallest pillar to its left

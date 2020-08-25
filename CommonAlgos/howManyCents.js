@@ -26,18 +26,15 @@ function solution(S) {
     const cache = {};
     let cents = 0;
     let maxDur = -Infinity;
-    let phoneNumber, mins, secs,largestPhoneNumber;
+    let largestPhoneNumber;
     for (let str of splitString) {
-      phoneNumber =   Number(str.slice(9).replace(/\D/g, ''));
-      mins = Number(str.slice(3,5));
-      secs = Number(str.slice(6,8));
-    //   console.log(phoneNumber, mins, secs);
-    //   cache[phoneNumber] = mins* 60 + secs
+      const  phoneNumber =   Number(str.slice(9).replace(/\D/g,''));
+      const mins = Number(str.slice(3,5));
+      const secs = Number(str.slice(6,8));
         if (!cache[phoneNumber]) {
             cache[phoneNumber] = mins * 60 + secs; 
         } else {
             cache [phoneNumber] += mins* 60 + secs;
-
         }
     }
     for (let phone in cache) {
@@ -46,7 +43,7 @@ function solution(S) {
             largestPhoneNumber = phone;
         }
         if (cache[phone] === maxDur ) {
-            largestPhoneNumber = Number(phone) > Number(largestPhoneNumber)? phone : largestPhoneNumber; 
+            largestPhoneNumber = Number(largestPhoneNumber) > Number(phone)? largestPhoneNumber : phone; 
         }
     }
     delete cache[largestPhoneNumber];
@@ -55,17 +52,15 @@ function solution(S) {
         if (cache[phone] < 300) {
             cents += cache[phone] *3;
         }
-        else if (cache[phone]% 60 > 0) {
-            cents += Math.ceil(cache[phone]/60 * 150);
+        else if (cache[phone] % 60 > 0) {
+            cents += (Math.ceil(cache[phone]/60)) * 150;
         }
         else if (cache[phone]%60 === 0) {
-            cents += cache[phone] *150;
+            cents += cache[phone] * 150;
         }
 
     }
-    return cents
-
-    
+    return cents;   
 }
 console.log(solution("00:01:07, 555-555-5555\n00:05:00, 555-555-5555\n00:05:01, 444-444-4444"));
 

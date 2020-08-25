@@ -34,7 +34,7 @@ const zigzagPattern = function(s, numRows) {
         return s;
     }
 
-    const rows = [];
+    const rows = [];console.log(console.log(console.log(
     for (let i = 0; i < numRows; i++) {
         rows[i] = '';
     }

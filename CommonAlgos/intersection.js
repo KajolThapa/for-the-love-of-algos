@@ -1,5 +1,6 @@
 /*
-Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs.
+Construct a function intersection that compares input arrays and 
+returns a new array with elements found in all of the inputs.
 */
 
 function intersection(arrays){
