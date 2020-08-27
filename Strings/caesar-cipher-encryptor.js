@@ -14,7 +14,7 @@
         const newkey = key % 26; // if key is a large number- 54 (26 +26 +2 )  is same as when key is 2
 
         for (const letter of str) {
-            output.push(getNewLetter(letter, newkey))
+            output.push(getNewLetter(letter, newkey));
         }
         return output.join('');
  }
@@ -25,3 +25,21 @@
  }
  
  console.log(caesarCipherEncryptor("xcyz", 2));
+
+ //Solution 2 without the UTF code
+
+ function caesarCipher(str, key) {
+     const output = [];
+     const newKey = key % 26;
+     const alphabets = "abcdefghijklmnopqrstuvwxyz".split('');
+     for (const letter of str) {
+         output.push(getShiftedLetter(letter, newKey, alphabets));
+     }
+     return output.join('');
+ }
+
+ function getShiftedLetter(letter, key, alphabets) {
+     const newNumCode = alphabets.indexOf(letter) + key;
+     return alphabets[newNumCode % 26];
+ }
+ console.log(caesarCipher("zya", 3))
