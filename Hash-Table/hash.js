@@ -67,7 +67,7 @@ function HashTable() {
         this.count += 1;
       }
       else {
-        this.storage[index] = value;
+        this.storage[index][key] = value; // handles collision using objects
       }
     }
     return this.count;
@@ -91,7 +91,8 @@ function HashTable() {
       //find the key and return tha value for that key
     let index = hashCode(key, this.SIZE);
     if (!this.storage[index]) {
-      return undefined;}
+      return undefined;
+    }
     return this.storage[index][key]
   };
   /**
@@ -134,23 +135,23 @@ function HashTable() {
     
     return Math.abs(hash) % size;
   }
-  const hash = new HashTable();
-   hash.set('1', 1 );
-   hash.set('2', 2);
-   hash.set('12', 12 );
-   console.log(hash);
-   console.log(hash.get('3'));
+  // const hash = new HashTable();
+  //  hash.set('1', 1 );
+  //  hash.set('11', "a");
+  // //  console.log(hash.remove("1"));
+  // //  console.log(hash.remove("1"));
+  // //  console.log(hash.get('3'));
   // hash.set('20', 20 );
   // hash.set('21', 21 );
   // hash.set('22', 22 );
   // hash.set('23', 23 );
-  // hash.set('1', 'altai' );
-  // console.log(hash.set('1', 'altai' ))
+  console.log(hash);
+  console.log(hash);
   // hash.get('12');
-  // hash.get('200');
-   console.log(hash.remove('12'));
-   console.log(hash);
-   console.log(hash.remove('12'));
+  // hash.get('200');s
+  //  console.log(hash.remove('12'));
+  //  console.log(hash);
+  //  console.log(hash.remove('12'));
    
   // hash.remove('2');
   // hash.remove('3');
