@@ -7,23 +7,22 @@
  * Do it in place
  *
  */
+// Time O(n)   |   Space O(1)
 function LinkedList(val) {
     this.val = val;
     this.next = null;
 }
 
 function reverseLinkedList(head) {
-    let curr = head;
-    let next = null;
-    let prev = null;
-
-    while (curr) {
-        next = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = next;
+    let currentNode = head;
+    let previousNode = null;
+    while (currentNode) {
+        const nextNode = currentNode.next;
+        currentNode.next = previousNode;
+        previousNode = currentNode;
+        currentNode = nextNode;
     }
-    return prev;
+    return previousNode;
 }
 
 const firstLL = new LinkedList("A");
@@ -32,4 +31,6 @@ firstLL.next = secLL;
 const thirdLL = new LinkedList("C");
 thirdLL.next = new LinkedList("D");
 secLL.next = thirdLL;
+
+console.log(firstLL);
 console.log(reverseLinkedList(firstLL));

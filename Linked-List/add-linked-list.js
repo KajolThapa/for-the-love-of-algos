@@ -17,39 +17,43 @@
      this.next = null; 
  }
 
- function addLinkedList(l1,l2) {
-     let currNode = new Node();
-     const head = currNode;
-     let sum = 0;
+ function addLinkedList(headOne,headTwo) {
+    let currNode = new Node();
+    const head = currNode;
+    let sum = 0;
+    while (headOne || headTwo || sum) {
+        if (headOne) {
+            sum += headOne.value;
+            headOne = headOne.next;
+        }
+        if (headTwo) {
+            sum += headTwo.value;
+            headTwo = headTwo.next;
+        }
+        if (sum > 9) {
+            currNode.next = new Node(sum % 10);
+            sum = 1;
+        } else {
+            currNode.next = new Node(sum);
+            sum = 0;
+        }
+        currNode = currNode.next;   
+    }
+    return head.next;
 
-     while (l1 || l2 || sum) {
-         if (l1) {
-             sum += l1.value;
-             l1 = l1.next;
-         }
-         if (l2) {
-             sum += l2.value;
-             l2 = l2.next;
-         }
-         if (sum > 9) {
-             currNode.next = new Node(sum % 10);
-             sum = 1;
-         }
-         else {
-             currNode.next = new Node(sum);
-             sum = 0;
-         }
-         currNode = currNode.next;
-     }
-     return head.next;
  }
 
- const firstLL = new Node(1);
- firstLL.next = new Node(2);
- firstLL.next.next = new Node(3);
+ const a = new Node(2);
+ const b = new Node(1);
+ const c = new Node(5);
+ a.next = b;
+ b.next =  c;
+ 
 
- const secondLL = new Node (7);
- secondLL.next = new Node(8);
- secondLL.next.next = new Node(9);
+ const d = new Node(5);
+ const e = new Node(9);
+ const f = new Node(2);
+ d.next = e;
+ e.next =  f;
 
- console.log(addLinkedList(firstLL, secondLL));
+ console.log(addLinkedList(a, d));
